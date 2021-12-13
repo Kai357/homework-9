@@ -1,8 +1,7 @@
-const util = require("util");
+const { v4: uuidv4 } = require("uuid");
 const router = require("express").Router();
 const fs = require("fs");
 const notes = require("../db/db.json");
-const { v4: uuidv4 } = require("uuid");
 
 router.get("/api/notes", (req, res) => {
   console.info(`${req.method} request received for tips`);
@@ -12,9 +11,9 @@ router.get("/api/notes", (req, res) => {
 router.post("/api/notes", (req, res) => {
   console.info(`${req.method} request received to add a tip`);
 
-  const { title, text, id } = req.body;
+  const { title, text } = req.body;
 
-  if (req.body) {
+  if (title && text) {
     const newNote = {
       title,
       text,
